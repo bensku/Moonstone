@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+    
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/' // Rembulan snapshots
+    }
+    
+    maven {
+        url 'http://repo.spongepowered.org/maven' // Sponge
+    }
+}
+
+dependencies {
+    compile 'net.sandius.rembulan:rembulan-runtime:0.1-SNAPSHOT'
+    compile 'net.sandius.rembulan:rembulan-compiler:0.1-SNAPSHOT'
+    compile 'net.sandius.rembulan:rembulan-stdlib:0.1-SNAPSHOT'
+    compile 'org.spongepowered:spongeapi:6.0.0-SNAPSHOT'
+    
+    testCompile 'junit:junit:4.12' // Unit tests needed at some point
+}
