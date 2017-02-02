@@ -8,6 +8,10 @@ package io.github.bensku.call;
  */
 public class NotResolvableException extends Exception {
 
+    public NotResolvableException(String message) {
+        super(message);
+    }
+
     private static final long serialVersionUID = -6369295138952193389L;
 
 }
