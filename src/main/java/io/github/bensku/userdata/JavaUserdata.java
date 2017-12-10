@@ -5,6 +5,8 @@ import net.sandius.rembulan.Table;
 import net.sandius.rembulan.Userdata;
 import net.sandius.rembulan.impl.ImmutableTable;
 import net.sandius.rembulan.impl.NonsuspendableFunctionException;
+import net.sandius.rembulan.runtime.AbstractFunction2;
+import net.sandius.rembulan.runtime.AbstractFunction3;
 import net.sandius.rembulan.runtime.AbstractFunctionAnyArg;
 import net.sandius.rembulan.runtime.ExecutionContext;
 import net.sandius.rembulan.runtime.LuaFunction;
@@ -23,55 +25,48 @@ public class JavaUserdata extends Userdata {
 
     @Override
     public Object getUserValue() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Object setUserValue(Object value) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Table getMetatable() {
-        // TODO Auto-generated method stub
-        return null;
+        return metatable;
     }
 
     @Override
     public Table setMetatable(Table mt) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException();
     }
     
-    public static class Index extends AbstractFunctionAnyArg {
+    public static class Index extends AbstractFunction2 {
 
         @Override
-        public void resume(ExecutionContext context, Object suspendedState)
-                throws ResolvedControlThrowable {
+        public void resume(ExecutionContext context, Object suspendedState) throws ResolvedControlThrowable {
             throw new NonsuspendableFunctionException();
         }
 
         @Override
-        public void invoke(ExecutionContext context, Object[] args)
-                throws ResolvedControlThrowable {
+        public void invoke(ExecutionContext context, Object obj, Object field) throws ResolvedControlThrowable {
             // TODO Auto-generated method stub
             
         }
         
     }
     
-    public static class NewIndex extends AbstractFunctionAnyArg {
+    public static class NewIndex extends AbstractFunction3 {
 
         @Override
-        public void resume(ExecutionContext context, Object suspendedState)
-                throws ResolvedControlThrowable {
+        public void resume(ExecutionContext context, Object suspendedState) throws ResolvedControlThrowable {
             throw new NonsuspendableFunctionException();
         }
 
         @Override
-        public void invoke(ExecutionContext context, Object[] args)
+        public void invoke(ExecutionContext context, Object obj, Object field, Object value)
                 throws ResolvedControlThrowable {
             // TODO Auto-generated method stub
             

@@ -13,5 +13,11 @@ public class NotResolvableException extends Exception {
     }
 
     private static final long serialVersionUID = -6369295138952193389L;
+    
+    // Ignore stack trace, as it improves performance
+    public Throwable fillInStackTrace() {
+        return this;
+        
+    }
 
 }
