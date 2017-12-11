@@ -1,5 +1,7 @@
 package io.github.bensku.userdata;
 
+import java.lang.invoke.MethodHandle;
+
 import net.sandius.rembulan.Metatables;
 import net.sandius.rembulan.Table;
 import net.sandius.rembulan.Userdata;
@@ -14,6 +16,15 @@ public class JavaMethod extends Userdata {
     private Table metatable = new ImmutableTable.Builder()
             .add(Metatables.MT_CALL, new Call())
             .build();
+    
+    /**
+     * Used to call the method.
+     */
+    private MethodHandle handle;
+    
+    public JavaMethod(MethodHandle handle) {
+        this.handle = handle;
+    }
     
     @Override
     public Object getUserValue() {
@@ -44,7 +55,15 @@ public class JavaMethod extends Userdata {
 
         @Override
         public void invoke(ExecutionContext context, Object[] args) throws ResolvedControlThrowable {
-            Object funcName = args[0];
+            Object result;
+            try {
+                // If it is instance method, first argument must be instance
+                // Conveniently, this is exactly how Lua treats instance methods internally
+                result = handle.invoke(args);
+            } catch (Throwable e) {
+                throw new RuntimeException(e); // TODO better error handling
+            }
+            context.getReturnBuffer().setTo(result); // Java methods can only return single value
         }
         
     }
