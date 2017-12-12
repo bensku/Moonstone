@@ -9,8 +9,9 @@ public class CachingResolver implements FieldResolver {
     private Map<String, FieldResolver> resolvers;
     private List<Class<? extends FieldResolver>> resolverOrder;
     
-    public CachingResolver() {
-        resolvers = new HashMap<>();
+    public CachingResolver(List<Class<? extends FieldResolver>> order) {
+        this.resolvers = new HashMap<>();
+        this.resolverOrder = order;
     }
     
     @Override
